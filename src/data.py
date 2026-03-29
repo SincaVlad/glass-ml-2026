@@ -2,14 +2,45 @@ from glasspy.data import SciGlass
 import pandas as pd
 
 OXIDE_FEATURES = [
-    'SiO2', 'B2O3', 'Al2O3', 'Na2O', 'CaO', 'K2O', 'MgO', 'P2O5',
-    'BaO', 'Li2O', 'ZnO', 'TiO2', 'PbO', 'ZrO2', 'SrO', 'La2O3',
-    'Fe2O3', 'Nb2O5', 'Sb2O3', 'Bi2O3', 'TeO2', 'V2O5', 'GeO2',
-    'WO3', 'SnO2', 'Ta2O5', 'Y2O3'
+    "SiO2",
+    "B2O3",
+    "Al2O3",
+    "Na2O",
+    "CaO",
+    "K2O",
+    "MgO",
+    "P2O5",
+    "BaO",
+    "Li2O",
+    "ZnO",
+    "TiO2",
+    "PbO",
+    "ZrO2",
+    "SrO",
+    "La2O3",
+    "Fe2O3",
+    "Nb2O5",
+    "Sb2O3",
+    "Bi2O3",
+    "TeO2",
+    "V2O5",
+    "GeO2",
+    "WO3",
+    "SnO2",
+    "Ta2O5",
+    "Y2O3",
 ]
 
-KELVIN_PROPERTIES = ['Tg', 'Tmelt', 'Tliquidus', 'Tsoft', 'TdilatometricSoftening',
-                     'TAnnealing', 'Tstrain', 'TLittletons']
+KELVIN_PROPERTIES = [
+    "Tg",
+    "Tmelt",
+    "Tliquidus",
+    "Tsoft",
+    "TdilatometricSoftening",
+    "TAnnealing",
+    "Tstrain",
+    "TLittletons",
+]
 
 
 def get_oxide_features() -> list[str]:
@@ -44,19 +75,15 @@ def load_glass_data(
         available = df["property"].columns.tolist()
         raise ValueError(f"'{target}' not found. Available: {available}")
 
-    # Filter to oxide-dominant compositions
     coverage = df["compounds"][OXIDE_FEATURES].sum(axis=1)
     oxide_mask = coverage >= coverage_threshold
 
-    # Build clean dataframe
     result = df["compounds"][OXIDE_FEATURES][oxide_mask].copy()
     result["other_oxides"] = (100 - coverage[oxide_mask]).clip(lower=0)
     result[target] = df["property"][target][oxide_mask]
 
-    # Drop rows where target is missing
     result = result.dropna(subset=[target])
 
-    # Convert temperature properties from Kelvin to Celsius
     if target in KELVIN_PROPERTIES:
         result[target] = result[target] - 273.15
 

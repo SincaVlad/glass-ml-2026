@@ -1,10 +1,11 @@
 [project]
 name = "glass-ml-2026"
 version = "0.1.0"
-description = "Add your description here"
+description = "Predicting glass properties using machine learning"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "glasspy>=0.6.0",
     "ipykernel>=7.2.0",
     "jupyter>=1.1.1",
     "matplotlib>=3.10.8",
@@ -13,3 +14,5 @@ dependencies = [
     "scikit-learn>=1.8.0",
     "seaborn>=0.13.2",
 ]
+[tool.ruff]
+line-length = 88

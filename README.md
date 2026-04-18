@@ -15,10 +15,10 @@ Evaluated on held-out test set:
 
 ## Roadmap
 
-- [x] Phase 1 — ML model (Random Forest baseline, feature engineering)
-- [ ] Phase 2 — FastAPI backend (model serving, inference endpoint)
-- [ ] Phase 3 — Streamlit frontend (interactive composition input)
-- [ ] Phase 4 — Deployment
+- [x] Phase 1 - ML model (Random Forest baseline, feature engineering)
+- [ ] Phase 2 - FastAPI backend (model serving, inference endpoint)
+- [ ] Phase 3 - Streamlit frontend (interactive composition input)
+- [ ] Phase 4 -  Deployment
 
 ## Dataset
 
